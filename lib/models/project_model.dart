@@ -29,4 +29,9 @@ class ProjectModel {
       'githubUrl': githubUrl,
     };
   }
+
+  @override
+  String toString() {
+    return 'ProjectModel{name: $name, description: $description, languages: $languages, githubUrl: $githubUrl}';
+  }
 }

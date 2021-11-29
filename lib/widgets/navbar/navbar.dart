@@ -4,13 +4,21 @@ import 'package:personal_site/widgets/navbar/navbar_item.dart';
 import 'package:personal_site/widgets/navbar/navigation_notification.dart';
 
 class Navbar extends StatefulWidget {
-  const Navbar({Key? key}) : super(key: key);
+  const Navbar({Key? key, this.initialRoute = ""}) : super(key: key);
+  final String initialRoute;
   @override
   _NavbarState createState() => _NavbarState();
 }
 
 class _NavbarState extends State<Navbar> {
   String _selectedRoute = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedRoute = widget.initialRoute;
+  }
+
   @override
   Widget build(BuildContext context) {
     return NotificationListener<NavigationNotification>(
@@ -30,7 +38,9 @@ class _NavbarState extends State<Navbar> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Ensar Emir EROL",
-                    style: Theme.of(context).textTheme.headline5),
+                    style: Theme.of(context).textTheme.headline5!.copyWith(
+                          color: Colors.white,
+                        )),
                 const Expanded(
                   child: SizedBox(),
                 ),

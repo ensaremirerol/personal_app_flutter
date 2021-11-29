@@ -20,4 +20,9 @@ class SkillModel {
       'rating': rating,
     };
   }
+
+  @override
+  String toString() {
+    return 'SkillModel{name: $name, level: $level, rating: $rating}';
+  }
 }
