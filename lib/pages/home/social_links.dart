@@ -11,36 +11,89 @@ class SocialLinks extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<ProfileModel> profiles =
         PortfolioService.of(context).portfolio.basics.profiles ?? [];
+    final String? mail = PortfolioService.of(context).portfolio.basics.email;
+    final String? phone = PortfolioService.of(context).portfolio.basics.phone;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        for (final ProfileModel profile in profiles)
-          Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: InkWell(
-              onTap: () async {
-                if (!await launch(profile.url ?? "")) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Could not launch ${profile.url}'),
-                    ),
-                  );
-                }
-              },
-              child: Chip(
-                labelPadding: const EdgeInsets.all(4.0),
-                avatar: Icon(getIcons(profile.network ?? "")),
-                label: Row(
-                  children: [
-                    Text("${profile.network} | ${profile.username}"),
-                    const Icon(Icons.chevron_right),
-                  ],
-                ),
-              ),
-            ),
-          ),
+        for (final ProfileModel profile in profiles) _getChip(context, profile),
+        if (mail != null) _getMailChip(context, mail),
+        if (phone != null) _getPhoneChip(context, phone),
       ],
     );
+  }
+
+  Widget _getChip(BuildContext context, ProfileModel profile) {
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: ActionChip(
+        onPressed: () async {
+          if (!await launch(profile.url ?? "")) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Could not launch ${profile.url}'),
+              ),
+            );
+          }
+        },
+        labelPadding: const EdgeInsets.all(4.0),
+        avatar: Icon(getIcons(profile.network ?? "")),
+        label: Row(
+          children: [
+            Text("${profile.network} | ${profile.username}"),
+            const Icon(Icons.chevron_right),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _getPhoneChip(BuildContext context, String phone) {
+    return Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: ActionChip(
+          onPressed: () async {
+            if (!await launch("tel:$phone")) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Could not phone to $phone'),
+                ),
+              );
+            }
+          },
+          labelPadding: const EdgeInsets.all(4.0),
+          avatar: const Icon(Icons.phone),
+          label: Row(
+            children: [
+              Text("Phone | $phone"),
+              const Icon(Icons.chevron_right),
+            ],
+          ),
+        ));
+  }
+
+  Widget _getMailChip(BuildContext context, String mail) {
+    return Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: ActionChip(
+          onPressed: () async {
+            if (!await launch("mailto:$mail")) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Could not mail to $mail'),
+                ),
+              );
+            }
+          },
+          labelPadding: const EdgeInsets.all(4.0),
+          avatar: const Icon(Icons.mail),
+          label: Row(
+            children: [
+              Text("E-mail | $mail"),
+              const Icon(Icons.chevron_right),
+            ],
+          ),
+        ));
   }
 
   IconData? getIcons(String network) {

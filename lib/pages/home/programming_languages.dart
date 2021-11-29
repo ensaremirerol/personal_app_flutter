@@ -13,16 +13,19 @@ class ProgrammingLanguagesWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        for (final SkillModel skill in skills)
-          Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Chip(
-              labelPadding: const EdgeInsets.all(4.0),
-              avatar: Icon(getIcons(skill.name)),
-              label: Text(skill.name),
-            ),
-          ),
+        for (final SkillModel skill in skills) _getChip(context, skill)
       ],
+    );
+  }
+
+  Widget _getChip(BuildContext context, SkillModel skill) {
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Chip(
+        labelPadding: const EdgeInsets.all(4.0),
+        avatar: Icon(getIcons(skill.name)),
+        label: Text(skill.name),
+      ),
     );
   }
 

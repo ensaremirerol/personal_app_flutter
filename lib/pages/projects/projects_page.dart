@@ -35,6 +35,7 @@ class ProjectsPage extends StatelessWidget {
               },
               itemCount: projects.length),
         ),
+        const Divider(),
         Card(
             child: ListTile(
                 title: Text("Other Projects"),

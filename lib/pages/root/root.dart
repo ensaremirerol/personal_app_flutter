@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:personal_site/pages/about/about_page.dart';
 import 'package:personal_site/pages/home/home_page.dart';
 import 'package:personal_site/pages/projects/projects_page.dart';
 import 'package:personal_site/widgets/navbar/navbar.dart';
@@ -22,7 +23,8 @@ class _RootPageState extends State<RootPage>
       body: NotificationListener<NavigationNotification>(
         onNotification: (notification) {
           if (currentRoute != notification.route) {
-            _navigatorKey.currentState!.pushNamed(notification.route);
+            _navigatorKey.currentState!
+                .pushReplacementNamed(notification.route);
             currentRoute = notification.route;
           }
           return true;
@@ -31,6 +33,11 @@ class _RootPageState extends State<RootPage>
           children: [
             const Navbar(
               initialRoute: HomePage.routeName,
+              items: [
+                NavbarItemModel(title: 'Home', route: '/'),
+                NavbarItemModel(title: 'About', route: '/about'),
+                NavbarItemModel(title: 'Projects', route: '/projects'),
+              ],
             ),
             Expanded(
                 child: Padding(
@@ -46,6 +53,9 @@ class _RootPageState extends State<RootPage>
                       break;
                     case ProjectsPage.routeName:
                       page = const ProjectsPage();
+                      break;
+                    case AboutPage.routeName:
+                      page = const AboutPage();
                       break;
                     default:
                       page = const HomePage();
@@ -70,9 +80,14 @@ class _RootPageState extends State<RootPage>
                           opacity: curvedAnimation,
                           child: SlideTransition(
                             position: offsetTween.animate(curvedAnimation),
-                            child: Container(
-                                color: Theme.of(context).canvasColor,
-                                child: child),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.1),
+                              child: Container(
+                                  color: Theme.of(context).canvasColor,
+                                  child: child),
+                            ),
                           ),
                         );
                       });

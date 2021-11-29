@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:personal_site/pages/root/root.dart';
 import 'package:personal_site/service/portfolio_service.dart';
 
@@ -14,6 +15,14 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Flutter Demo',
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate
+        ],
+        supportedLocales: const [
+          Locale('en'),
+        ],
         theme: ThemeData(
           primarySwatch: Colors.blue,
           textTheme: Theme.of(context).textTheme.apply(

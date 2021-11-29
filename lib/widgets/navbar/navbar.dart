@@ -4,8 +4,10 @@ import 'package:personal_site/widgets/navbar/navbar_item.dart';
 import 'package:personal_site/widgets/navbar/navigation_notification.dart';
 
 class Navbar extends StatefulWidget {
-  const Navbar({Key? key, this.initialRoute = ""}) : super(key: key);
+  const Navbar({Key? key, this.initialRoute = "", required this.items})
+      : super(key: key);
   final String initialRoute;
+  final List<NavbarItemModel> items;
   @override
   _NavbarState createState() => _NavbarState();
 }
@@ -51,7 +53,7 @@ class _NavbarState extends State<Navbar> {
   }
 
   List<Widget> get _buildNavbarItems => [
-        for (final item in _items)
+        for (final item in widget.items)
           NavbarItem(
             title: item.title,
             route: item.route,
@@ -61,18 +63,12 @@ class _NavbarState extends State<Navbar> {
       ];
 }
 
-class _NavbarItemModel {
+class NavbarItemModel {
   final String title;
   final String route;
-  const _NavbarItemModel({
+  const NavbarItemModel({
     required this.title,
     required this.route,
   });
 }
 
-List<_NavbarItemModel> _items = const [
-  _NavbarItemModel(title: 'Home', route: '/'),
-  _NavbarItemModel(title: 'About', route: '/about'),
-  _NavbarItemModel(title: 'Projects', route: '/projects'),
-  _NavbarItemModel(title: 'Contact', route: '/contact'),
-];
