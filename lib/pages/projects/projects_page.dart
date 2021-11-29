@@ -13,7 +13,13 @@ class ProjectsPage extends StatelessWidget {
     List<ProjectModel> projects =
         PortfolioService.of(context).portfolio.projects;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text(
+          "Projects",
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        const Divider(),
         Expanded(
           child: ListView.builder(
               itemBuilder: (context, index) {
