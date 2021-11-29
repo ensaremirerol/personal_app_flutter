@@ -13,8 +13,8 @@ class SocialLinks extends StatelessWidget {
         PortfolioService.of(context).portfolio.basics.profiles ?? [];
     final String? mail = PortfolioService.of(context).portfolio.basics.email;
     final String? phone = PortfolioService.of(context).portfolio.basics.phone;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Wrap(
+      alignment: WrapAlignment.center,
       children: [
         for (final ProfileModel profile in profiles) _getChip(context, profile),
         if (mail != null) _getMailChip(context, mail),
@@ -39,6 +39,7 @@ class SocialLinks extends StatelessWidget {
         labelPadding: const EdgeInsets.all(4.0),
         avatar: Icon(getIcons(profile.network ?? "")),
         label: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text("${profile.network} | ${profile.username}"),
             const Icon(Icons.chevron_right),
@@ -64,6 +65,7 @@ class SocialLinks extends StatelessWidget {
           labelPadding: const EdgeInsets.all(4.0),
           avatar: const Icon(Icons.phone),
           label: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text("Phone | $phone"),
               const Icon(Icons.chevron_right),
@@ -88,6 +90,7 @@ class SocialLinks extends StatelessWidget {
           labelPadding: const EdgeInsets.all(4.0),
           avatar: const Icon(Icons.mail),
           label: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text("E-mail | $mail"),
               const Icon(Icons.chevron_right),

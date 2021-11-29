@@ -10,8 +10,8 @@ class ProgrammingLanguagesWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<SkillModel> skills =
         PortfolioService.of(context).portfolio.skills;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Wrap(
+      alignment: WrapAlignment.center,
       children: [
         for (final SkillModel skill in skills) _getChip(context, skill)
       ],

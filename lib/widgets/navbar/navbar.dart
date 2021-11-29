@@ -31,21 +31,22 @@ class _NavbarState extends State<Navbar> {
         return false;
       },
       child: Container(
-        width: double.infinity,
-        height: 80,
+        width: MediaQuery.of(context).size.width,
         color: Theme.of(context).primaryColor,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: OverflowBar(
+              alignment: MainAxisAlignment.spaceEvenly,
+              overflowSpacing: 10,
+              overflowAlignment: OverflowBarAlignment.center,
               children: [
                 Text("Ensar Emir EROL",
                     style: Theme.of(context).textTheme.headline5!.copyWith(
                           color: Colors.white,
                         )),
-                const Expanded(
-                  child: SizedBox(),
-                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.2,
+                )
               ]..addAll(_buildNavbarItems)),
         ),
       ),
@@ -71,4 +72,3 @@ class NavbarItemModel {
     required this.route,
   });
 }
-
