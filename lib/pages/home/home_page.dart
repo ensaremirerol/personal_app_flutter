@@ -12,7 +12,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BasicsModel basics = PortfolioService.of(context).portfolio.basics;
-    return Center(
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[

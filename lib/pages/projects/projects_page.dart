@@ -22,6 +22,7 @@ class ProjectsPage extends StatelessWidget {
         const Divider(),
         Expanded(
           child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 return Card(
                   child: ListTile(

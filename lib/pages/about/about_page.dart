@@ -25,6 +25,7 @@ class AboutPage extends StatelessWidget {
         PortfolioService.of(context).portfolio.interests;
 
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text("Education", style: Theme.of(context).textTheme.headline6),
         const Divider(),
