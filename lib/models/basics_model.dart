@@ -7,7 +7,6 @@ class BasicsModel {
   final String? summary;
   final List<ProfileModel>? profiles;
   final String? email;
-  final String? phone;
 
   BasicsModel({
     this.name,
@@ -16,7 +15,6 @@ class BasicsModel {
     this.summary,
     this.profiles,
     this.email,
-    this.phone,
   });
 
   factory BasicsModel.fromJson(Map<String, dynamic> json) => BasicsModel(
@@ -27,7 +25,6 @@ class BasicsModel {
         profiles: List<ProfileModel>.from(
             json["profiles"].map((x) => ProfileModel.fromJson(x))),
         email: json["email"],
-        phone: json["phone"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -37,11 +34,10 @@ class BasicsModel {
         "summary": summary,
         "profiles": profiles?.map((e) => e.toJson()).toList() ?? [],
         "email": email,
-        "phone": phone,
       };
 
   @override
   String toString() {
-    return 'BasicsModel{name: $name, label: $label, image: $image, summary: $summary, profiles: $profiles, email: $email, phone: $phone}';
+    return 'BasicsModel{name: $name, label: $label, image: $image, summary: $summary, profiles: $profiles, email: $email}';
   }
 }

@@ -12,13 +12,11 @@ class SocialLinks extends StatelessWidget {
     final List<ProfileModel> profiles =
         PortfolioService.of(context).portfolio.basics.profiles ?? [];
     final String? mail = PortfolioService.of(context).portfolio.basics.email;
-    final String? phone = PortfolioService.of(context).portfolio.basics.phone;
     return Wrap(
       alignment: WrapAlignment.center,
       children: [
         for (final ProfileModel profile in profiles) _getChip(context, profile),
         if (mail != null) _getMailChip(context, mail),
-        if (phone != null) _getPhoneChip(context, phone),
       ],
     );
   }
@@ -49,30 +47,6 @@ class SocialLinks extends StatelessWidget {
     );
   }
 
-  Widget _getPhoneChip(BuildContext context, String phone) {
-    return Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: ActionChip(
-          onPressed: () async {
-            if (!await launch("tel:$phone")) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Could not phone to $phone'),
-                ),
-              );
-            }
-          },
-          labelPadding: const EdgeInsets.all(4.0),
-          avatar: const Icon(Icons.phone),
-          label: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text("Phone | $phone"),
-              const Icon(Icons.chevron_right),
-            ],
-          ),
-        ));
-  }
 
   Widget _getMailChip(BuildContext context, String mail) {
     return Padding(
